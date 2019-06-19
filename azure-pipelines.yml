@@ -3,8 +3,15 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
+#To specify the events when you want to run the pipeline
 trigger:
 - master
+#- releases/*
+
+# Trigger for pull request validation
+pr:
+  - master
+  - releases/*
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -21,7 +28,7 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-    
+    #To build with a command line or script
 # - script: |
 #     echo Starting the build
 #     mvn package
